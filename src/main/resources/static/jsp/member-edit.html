@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            后台管理系统
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../css/x-admin.css" media="all">
+    </head>
+    
+    <body>
+        <div class="x-body">
+            <form class="layui-form" lay-filter="example">
+                <div class="layui-form-item">
+                    <label for="userCode" class="layui-form-label">
+                        用户名
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userCode" name="userCode" required   autocomplete="off"  class="layui-input" lay-verify="required|userCode">
+                    </div>
+                    
+                </div>
+                <div class="layui-form-item">
+                    <label for="userName" class="layui-form-label">
+                        真实姓名
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userName"  name="userName" required 
+                        autocomplete="off" class="layui-input" lay-verify="required|userName">
+                    </div>
+                    
+                </div>
+                <div class="layui-form-item">
+                    <label for="userPhone" class="layui-form-label">
+                        手机号码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userPhone" name="userPhone" required lay-verify="required|phone"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    
+                </div>
+                <div class="layui-form-item">
+                    <label for="userEmail" class="layui-form-label">
+                        邮箱
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userEmail" name="userEmail" required lay-verify="email"
+                        autocomplete="off"  class="layui-input">
+                    </div>
+                    
+                </div>
+                
+                
+                <div class="layui-form-item">
+    				<label class="layui-form-label">性别</label>
+    				<div class="layui-input-block">
+     					<input type="radio" name="userSex" lay-verify="userSex" value="男" title="男">
+      					<input type="radio" name="userSex" lay-verify="userSex" value="女" title="女">
+    				</div>
+  				</div>
+                
+                
+                
+                <div class="layui-form-item">
+                    <label for="userAdress" class="layui-form-label">
+                        地址
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userAdress" name="userAdress" required 
+                        autocomplete="off" class="layui-input" lay-verify="userAdress">
+                    </div>
+                    
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label for="remarks" class="layui-form-label">
+                        备注
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea id="remarks" placeholder="请输入内容" class="layui-textarea" name="remarks" lay-verify="remarks"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_sign" class="layui-form-label">
+                    </label>
+                    <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
+                        保存
+                    </button>
+                </div>
+            </form>
+        </div>
+        <script src="../layui/layui.js" charset="utf-8">
+        </script>
+        <script src="../js/x-layui.js" charset="utf-8">
+        </script>
+       <script src="../js/jquery.min.js"></script>
+        
+        <script>
+        
+        var userName = "";
+        var userCode = "";
+        var userPhone = "";
+        var userEmail = "";
+        var userAdress = "";
+        var userSex = "";
+        var remarks = "";
+        var id = "";
+        
+        
+        $(function(){
+        	var url = window.location.search;
+			id = url.split('=')[1];
+			var s = {};
+			s.id = id;
+			$.ajax({
+       		    //请求方式
+       		    type : "POST",
+       		    //请求的媒体类型
+       		    contentType: "application/json;charset=UTF-8",
+       		    //请求地址
+       		    url : "/Shopping/getAllUserMessage",
+       		    //数据，json字符串
+       		    data : JSON.stringify(s),
+       		    //请求成功
+       		    success : function(result) {
+       		        if(result.code == 1){
+       		        	console.log('系统错误，请联系管理员!!!'); 
+       		        }else if(result.code == 0){
+       		        	var data = result.data[0];
+       		        	userName = data.userName;
+       		        	userCode = data.userCode;
+       		        	userPhone = data.userPhone;
+       		        	userEmail = data.userEmail;
+       		        	userAdress = data.userAdress;
+       		        	userSex = data.userSex;
+       		        	remarks = data.remarks;
+       		        }else{
+       		        	console.log('系统错误，请联系管理员!!!');
+       		        }
+       		    },
+       		    //请求失败，包含具体的错误信息
+       		    error : function(e){
+       		        console.log(e.status);
+       		        console.log(e.responseText);
+       		    }
+       		});
+			
+        });
+
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+              var form = layui.form
+              ,layer = layui.layer;
+            
+              //自定义验证规则
+               form.verify({
+                 
+                 userCode: function(value){
+                     if(value.length < 1 || value.length >17){
+                       return '用户名不得为空且不得超过17个字符';
+                     }
+                 },
+                 userName: function(value){
+                     if(value.length > 17 || value.length <1){
+                       return '真实姓名不得为空且不得超过17个字符';
+                     }
+                   },
+                 userSex: function(){
+
+                	            var value = $('input[name="userSex"]:checked').val();
+                	             if(typeof(value) == "undefined"){
+
+                	                                       return '请选择性别';
+
+
+                	                }
+
+                	 },
+                 userAdress: function(value){
+                     if(value.length > 99 ){
+                       return '地址不得超过99个字符';
+                     }
+                 },
+                 remarks: function(value){
+                     if(value.length >99 ){
+                       return '备注不得超过99个字符';
+                     }
+                 },
+                 
+               });
+              //监听提交
+               form.val('example', {
+              "userName": userName // "name": "value"
+              ,"userCode": userCode
+              ,"userPhone":userPhone
+              ,"userEmail": userEmail
+              ,"userSex": userSex
+              ,"userAdress": userAdress
+              ,"remarks": remarks
+            });
+              
+              
+              form.on('submit(save)', function(data){
+                var s = {};
+				s.id = id;
+				s.userCode = $("#userCode").val();
+				s.userName = $("#userName").val();
+				s.userPhone = $("#userPhone").val();
+				s.userEmail = $("#userEmail").val();
+				s.userSex = $('input[name="userSex"]:checked').val();
+				s.userAdress = $("#userAdress").val();
+				s.remarks = $('#remarks').val();
+				$.ajax({
+	       		    //请求方式
+	       		    type : "POST",
+	       		    //请求的媒体类型
+	       		    contentType: "application/json;charset=UTF-8",
+	       		    //请求地址
+	       		    url : "/Shopping/updateUser",
+	       		    //数据，json字符串
+	       		    data : JSON.stringify(s),
+	       		    //请求成功
+	       		    success : function(result) {
+	       		        if(result.code == 1){
+	       		        	console.log('系统错误，请联系管理员!!!'); 
+	       		        }else if(result.code == 0){
+	       		        	layer.alert("增加成功", {icon: 6,closeBtn: 0},function () {
+	       	                    // 获得frame索引
+	       	                    var index = parent.layer.getFrameIndex(window.name);
+	       	                    //关闭当前frame
+	       	                    parent.layer.close(index);
+	       	                });
+	       		        }else{
+	       		        	console.log('系统错误，请联系管理员!!!');
+	       		        }
+	       		    },
+	       		    //请求失败，包含具体的错误信息
+	       		    error : function(e){
+	       		        console.log(e.status);
+	       		        console.log(e.responseText);
+	       		    }
+	       		}); 
+	                
+                
+                return false;
+              });
+              
+              
+            });
+        </script>
+        
+    </body>
+
+</html>

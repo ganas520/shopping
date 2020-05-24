@@ -1,0 +1,54 @@
+# 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：  
+#   测试环境：java -jar test-service.jar --spring.profiles.active=test  
+#   生产环境：java -jar test-service.jar --spring.profiles.active=prod
+
+--- #注意前面有短横线
+#测试环境###########################################################################################################################################
+spring:  
+  application:
+    name: test-service
+  profiles: test #测试环境
+  
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource   #这里是配置druid连接池，以下都是druid的配置信息
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    
+mybatis:
+  mapper-locations: classpath*:/mapper/**Mapper.xml    #把xml文件放在com.XX.mapper.*中可能会出现找到的问题，这里把他放在resource下的mapper中
+  typeAliasesPackage: com.test.domain         #这里是实体类的位置，#实体扫描，多个package用逗号或者分号分隔
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+logging:
+  file: test-service.log
+  level:
+    com.test: debug 
+  
+--- #注意前面的短横线
+#正式环境###########################################################################################################################################
+spring:  
+  application:
+    name: test-service
+  profiles: prod
+    
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+ 
+mybatis:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  typeAliasesPackage: com.test.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+ 
+logging:
+  file: test-service.log
+  level:
+    com.test: debug

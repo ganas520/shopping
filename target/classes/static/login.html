@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>系统登录</title>
+  <link rel="stylesheet" href="css/login.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="layer/layer.js"></script>
+  <script type="text/javascript" src="js/md5.js"></script>
+  <script src="lib/layui/layui.js" charset="utf-8"></script>
+  <script src="js/jquery.params.js"></script>
+</head>
+<body class="login-bg">
+    <div class="login">
+        <div class="message">系统登录</div>
+        <div id="darkbannerwrap"></div>   
+        <form  class="layui-form" >
+            <input id="userCode" name="userCode" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input id="userPassword" name="userPassword" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="button" onclick="login()">
+            <hr class="hr20" >
+        </form>
+    </div>
+    <script>
+    	function login(){
+ 	    	var list = null;
+			var s = {};
+ 	   		s.userCode = $('#userCode').val();
+			//$('input[name="password"]').attr('type','text'); // 转换input的type
+			s.userPassword = hex_md5($("#userPassword").val());
+			$.ajax({
+		    	//请求方式
+		    	type : "POST",
+		    	//请求的媒体类型
+		    	contentType: "application/json;charset=UTF-8",
+		    	//请求地址
+		    	url : "/Shopping/login",
+		    	//数据，json字符串
+		    	data : JSON.stringify(s),
+		    	//请求成功
+		    	success : function(result) {
+		        	if(result == 0){
+		        		layer.msg('用户名或密码错误!!!'); 
+		        	}else if(result == 1){
+		        		window.location.href="index.html?userCode="+s.userCode;
+		        	}
+		    	},
+		    	//请求失败，包含具体的错误信息
+		    	error : function(e){
+		        	console.log(e.status);
+		        	console.log(e.responseText);
+		    	}
+			});
+    	}
+	</script>
+</body>
+</html>

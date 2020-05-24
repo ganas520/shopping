@@ -1,0 +1,3 @@
+spring:
+    profiles:
+        active: dev   #默认环境(开发环境)
