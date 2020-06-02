@@ -93,11 +93,18 @@ public class UserAction {
 	
 	@RequestMapping(value="/register")
 	public Map<String,Object> register(@RequestBody(required=false) TbUser tbUser){
-		int insertCount = tbUserService.insertUser(tbUser);
+		TbUser tbUserCode = new TbUser();
+		tbUserCode.setUserCode(tbUser.getUserCode());
+		List<TbUser> tbUserList = tbUserService.getAllUserMessage(tbUserCode);
 		Map<String,Object> map = new HashMap<String,Object>();
+		if(tbUserList.size() >0) {
+			map.put("data", 1);
+		}else {
+			tbUserService.insertUser(tbUser);
+			map.put("data", 0);
+		}
 		map.put("message", "请求成功");
 		map.put("code", 0);
-		map.put("data", insertCount);
 		return map;
 	}
 	
