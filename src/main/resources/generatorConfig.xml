@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
  
 <generatorConfiguration>
-	<classPathEntry location="D:\jar\mysql-connector-java-5.1.44.jar" />
+	<classPathEntry location="D:\jar\mysql-connector-java-5.1.48.jar" />
   <context id="DB2Tables" targetRuntime="MyBatis3">
     <commentGenerator>
     	<!-- 是否去除自动生成的注释 -->
@@ -10,7 +10,7 @@
     </commentGenerator>
     <!-- Mysql数据库连接的信息：驱动类、连接地址、用户名、密码 -->
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://localhost:3306/flight"
+        connectionURL="jdbc:mysql://localhost:3306/shopping?serverTimezone=UTC"
         userId="root"
         password="root">
     </jdbcConnection>
@@ -50,7 +50,7 @@
     
 	<!-- 指定数据表 -->
 	
-	<table schema="" tableName="tb_user"></table>
+	<table schema="" tableName="tb_order"></table>
     
     <!-- 有些表的字段需要指定java类型 
     <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >

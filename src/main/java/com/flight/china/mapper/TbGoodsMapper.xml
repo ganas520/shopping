@@ -7,15 +7,15 @@
     <result column="goods_name_korean" jdbcType="VARCHAR" property="goodsNameKorean" />
     <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
     <result column="goods_label" jdbcType="VARCHAR" property="goodsLabel" />
-    <result column="create_time" jdbcType="DATE" property="createTime" />
-    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="goods_status" jdbcType="VARCHAR" property="goodsStatus" />
     <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
     <result column="product_ownership" jdbcType="VARCHAR" property="productOwnership" />
     <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
     <result column="logistics_cost" jdbcType="DECIMAL" property="logisticsCost" />
     <result column="wholesale_price" jdbcType="DECIMAL" property="wholesalePrice" />
-    <result column="image_adress" jdbcType="VARCHAR" property="imageAdress" />
+    <result column="image_address" jdbcType="VARCHAR" property="imageAddress" />
     <result column="goods_link" jdbcType="VARCHAR" property="goodsLink" />
     <result column="image_link" jdbcType="VARCHAR" property="imageLink" />
     <result column="abroad_shopping" jdbcType="VARCHAR" property="abroadShopping" />
@@ -38,10 +38,10 @@
       and  goods_label = #{goodsLabel,jdbcType=VARCHAR}
       </if>
       <if test="createTime != null">
-      and  create_time = #{createTime,jdbcType=DATE}
+      and  create_time = #{createTime,jdbcType=TIMESTAMP}
       </if>
       <if test="updateTime != null">
-      and  update_time = #{updateTime,jdbcType=DATE}
+      and  update_time = #{updateTime,jdbcType=TIMESTAMP}
       </if>
       <if test="goodsStatus != null">
       and  goods_status = #{goodsStatus,jdbcType=VARCHAR}
@@ -61,8 +61,8 @@
       <if test="wholesalePrice != null">
       and  wholesale_price = #{wholesalePrice,jdbcType=DECIMAL}
       </if>
-      <if test="imageAdress != null">
-      and  image_adress = #{imageAdress,jdbcType=VARCHAR}
+      <if test="imageAddress != null">
+      and  image_address = #{imageAddress,jdbcType=VARCHAR}
       </if>
       <if test="goodsLink != null">
       and  goods_link = #{goodsLink,jdbcType=VARCHAR}
@@ -78,7 +78,7 @@
   <sql id="Base_Column_List">
     id, goods_name_chinese, goods_name_korean, goods_code, goods_label, create_time, 
     update_time, goods_status, supplier_name, product_ownership, purchase_price, logistics_cost, 
-    wholesale_price, image_adress, goods_link, image_link, abroad_shopping
+    wholesale_price, image_address, goods_link, image_link, abroad_shopping
   </sql>
   
   <select id="selectByExample" parameterType="com.flight.china.bean.TbGoodsExample" resultMap="BaseResultMap">
@@ -107,16 +107,14 @@
   
   <insert id="insert" parameterType="com.flight.china.bean.TbGoods">
     insert into tb_goods (id, goods_name_chinese, goods_name_korean, 
-      goods_code, goods_label, create_time, 
-      update_time, goods_status, supplier_name, 
+      goods_code, goods_label, create_time,  goods_status, supplier_name, 
       product_ownership, purchase_price, logistics_cost, 
-      wholesale_price, image_adress, goods_link, 
+      wholesale_price, image_address, goods_link, 
       image_link, abroad_shopping)
     values (#{id,jdbcType=INTEGER}, #{goodsNameChinese,jdbcType=VARCHAR}, #{goodsNameKorean,jdbcType=VARCHAR}, 
-      #{goodsCode,jdbcType=VARCHAR}, #{goodsLabel,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
-      #{updateTime,jdbcType=DATE}, #{goodsStatus,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
+      #{goodsCode,jdbcType=VARCHAR}, #{goodsLabel,jdbcType=VARCHAR},DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s'),  #{goodsStatus,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
       #{productOwnership,jdbcType=VARCHAR}, #{purchasePrice,jdbcType=DECIMAL}, #{logisticsCost,jdbcType=DECIMAL}, 
-      #{wholesalePrice,jdbcType=DECIMAL}, #{imageAdress,jdbcType=VARCHAR}, #{goodsLink,jdbcType=VARCHAR}, 
+      #{wholesalePrice,jdbcType=DECIMAL}, #{imageAddress,jdbcType=VARCHAR}, #{goodsLink,jdbcType=VARCHAR}, 
       #{imageLink,jdbcType=VARCHAR}, #{abroadShopping,jdbcType=VARCHAR})
   </insert>
   
@@ -162,8 +160,8 @@
       <if test="wholesalePrice != null">
         wholesale_price,
       </if>
-      <if test="imageAdress != null">
-        image_adress,
+      <if test="imageAddress != null">
+        image_address,
       </if>
       <if test="goodsLink != null">
         goods_link,
@@ -174,8 +172,8 @@
       <if test="abroadShopping != null">
         abroad_shopping,
       </if>
+	    create_time
     </trim>
-    
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
@@ -193,10 +191,10 @@
         #{goodsLabel,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=DATE},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=DATE},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsStatus != null">
         #{goodsStatus,jdbcType=VARCHAR},
@@ -216,8 +214,8 @@
       <if test="wholesalePrice != null">
         #{wholesalePrice,jdbcType=DECIMAL},
       </if>
-      <if test="imageAdress != null">
-        #{imageAdress,jdbcType=VARCHAR},
+      <if test="imageAddress != null">
+        #{imageAddress,jdbcType=VARCHAR},
       </if>
       <if test="goodsLink != null">
         #{goodsLink,jdbcType=VARCHAR},
@@ -226,8 +224,9 @@
         #{imageLink,jdbcType=VARCHAR},
       </if>
       <if test="abroadShopping != null">
-        #{abroadShopping,jdbcType=VARCHAR},
+        #{abroadShopping,jdbcType=VARCHAR}
       </if>
+	    now()
     </trim>
   </insert>
   
@@ -258,10 +257,10 @@
         goods_label = #{record.goodsLabel,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=DATE},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=DATE},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.goodsStatus != null">
         goods_status = #{record.goodsStatus,jdbcType=VARCHAR},
@@ -282,7 +281,7 @@
         wholesale_price = #{record.wholesalePrice,jdbcType=DECIMAL},
       </if>
       <if test="record.imageAdress != null">
-        image_adress = #{record.imageAdress,jdbcType=VARCHAR},
+        image_address = #{record.imageAddress,jdbcType=VARCHAR},
       </if>
       <if test="record.goodsLink != null">
         goods_link = #{record.goodsLink,jdbcType=VARCHAR},
@@ -298,22 +297,51 @@
   
   <update id="updateByExample" parameterType="map">
     update tb_goods
-    set id = #{record.id,jdbcType=INTEGER},
-      goods_name_chinese = #{record.goodsNameChinese,jdbcType=VARCHAR},
-      goods_name_korean = #{record.goodsNameKorean,jdbcType=VARCHAR},
-      goods_code = #{record.goodsCode,jdbcType=VARCHAR},
-      goods_label = #{record.goodsLabel,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE},
-      update_time = #{record.updateTime,jdbcType=DATE},
-      goods_status = #{record.goodsStatus,jdbcType=VARCHAR},
-      supplier_name = #{record.supplierName,jdbcType=VARCHAR},
-      product_ownership = #{record.productOwnership,jdbcType=VARCHAR},
-      purchase_price = #{record.purchasePrice,jdbcType=DECIMAL},
-      logistics_cost = #{record.logisticsCost,jdbcType=DECIMAL},
-      wholesale_price = #{record.wholesalePrice,jdbcType=DECIMAL},
-      image_adress = #{record.imageAdress,jdbcType=VARCHAR},
-      goods_link = #{record.goodsLink,jdbcType=VARCHAR},
-      image_link = #{record.imageLink,jdbcType=VARCHAR},
-      abroad_shopping = #{record.abroadShopping,jdbcType=VARCHAR}
+    set 
+      goods_name_chinese = #{goodsNameChinese,jdbcType=VARCHAR},
+      goods_name_korean = #{goodsNameKorean,jdbcType=VARCHAR},
+      goods_code = #{goodsCode,jdbcType=VARCHAR},
+      goods_label = #{goodsLabel,jdbcType=VARCHAR},
+      update_time = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s'),
+      goods_status = #{goodsStatus,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      product_ownership = #{productOwnership,jdbcType=VARCHAR},
+      purchase_price = #{purchasePrice,jdbcType=DECIMAL},
+      logistics_cost = #{logisticsCost,jdbcType=DECIMAL},
+      wholesale_price = #{wholesalePrice,jdbcType=DECIMAL},
+      image_address = #{imageAddress,jdbcType=VARCHAR},
+      goods_link = #{goodsLink,jdbcType=VARCHAR},
+      image_link = #{imageLink,jdbcType=VARCHAR},
+      abroad_shopping = #{abroadShopping,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="getGoodsLike" parameterType="com.flight.china.bean.TbGoods" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_goods
+    where 1=1
+    <if test="goodsCode != null and goodsCode != null">
+    and goods_code like  CONCAT(CONCAT('%', #{goodsCode}), '%')
+    </if>
+    <if test="goodsNameChinese != null and goodsNameChinese != null">
+    and   (goods_name_chinese like  CONCAT(CONCAT('%', #{goodsNameChinese}), '%') or goods_name_korean like CONCAT(CONCAT('%', #{goodsNameChinese}), '%'))
+    </if>
+    <if test="supplierName != null and supplierName != null">
+    and supplier_name like  CONCAT(CONCAT('%', #{supplierName}), '%')
+    </if>
+    <if test="goodsStatus != null and goodsStatus != null">
+    and goods_status = #{goodsStatus,jdbcType=VARCHAR}
+    </if>
+     <if test="createTime != null and createTime != null">
+    and date_format(create_time,'%Y-%m-%d') between #{createTime} and #{updateTime}
+    <!-- CONCAT(CONCAT('(', create_time &gt;= #{createTime} or create_time &lt;= #{updateTime}), ')')-->
+    </if>
+     order by create_time DESC
+	<if test="startWith != null and rows != null">
+       <include refid="Common.pagingEnd"/>  
+    </if>
+ 	</select>
+  
 </mapper>

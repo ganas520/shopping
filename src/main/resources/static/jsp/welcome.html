@@ -23,11 +23,11 @@
 <div class="x-body">
     <blockquote class="layui-elem-quote">
         <sapn>admin</sapn>欢迎使用后台管理系统！
-        <span class="f-14">v1.0</span> &nbsp;&nbsp; 登录次数：
+        <!-- <span class="f-14">v1.0</span> &nbsp;&nbsp; 登录次数：
         <sapn style="font-family: 'yjsz';font-size: 2rem">
-            68
+            68-->
         </sapn>&nbsp;&nbsp; 登陆时间：
-        <span style="color: #FF5722; font-family: 'yjsz';font-size: 2rem">2019-03-03 16:36</span>
+        <span id = "getDate" style="color: #FF5722; font-family: 'yjsz';font-size: 2rem"></span>
     </blockquote>
     <div class="row">
         <div class="col-xs-6 col-sm-4 col-md-2">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="value tab-menu" bind="1">
                     <a href="javascript:;" data-url="user-info.html" data-parent="true" data-title="友情连接"> <i class="iconfont " data-icon=""></i> <h1>20</h1> </a>
-                    <a href="javascript:;" data-url="user-info.html" data-parent="true" data-title="友情连接"> <i class="iconfont " data-icon=""></i><span>友情连接</span></a>
+                    <a href="javascript:;" data-url="user-info.html" data-parent="true" data-title="友情连接"> <i class="iconfont " data-icon=""></i><span>订单总数</span></a>
                 </div>
             </section>
 
@@ -64,7 +64,7 @@
 
                 <div class="value tab-menu" bind="1">
                     <a href="javascript:;" data-url="user-info.html" data-parent="true" data-title="文章总数"> <i class="iconfont " data-icon=""></i> <h1>242</h1> </a>
-                    <a href="javascript:;" data-url="user-info.html" data-parent="true" data-title="文章总数"> <i class="iconfont " data-icon=""></i><span>文章总数</span></a>
+                    <a href="javascript:;" data-url="user-info.html" data-parent="true" data-title="文章总数"> <i class="iconfont " data-icon=""></i><span>商品总数</span></a>
                 </div>
 
             </section>
@@ -107,69 +107,116 @@
 
 <script src="../lib/layui/layui.js" charset="utf-8"></script>
 <script src="../js/echarts.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.params.js"></script>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
 
+    
+    function login(){
+		$.ajax({
+	    	//请求方式
+	    	type : "POST",
+	    	//请求的媒体类型
+	    	contentType: "application/json;charset=UTF-8",
+	    	//请求地址
+	    	url : "/Shopping/getDate",
+	    	//数据，json字符串
+	    	//请求成功
+	    	success : function(result) {
+	        	$('#getDate').html(result.data);
+	    	},
+	    	//请求失败，包含具体的错误信息
+	    	error : function(e){
+	        	console.log(e.status);
+	        	console.log(e.responseText);
+	    	}
+		});
+	}
+    
+    
+    $(function(){
+    	login()
+	 });
+    
     // 指定图表的配置项和数据
-    var option = {
-        tooltip: {
-            trigger: 'axis'
+   option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ['直接访问']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value'
+    },
+    yAxis: {
+        type: 'category',
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    series: [
+        {
+            name: '直接访问',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'insideRight'
+            },
+            data: [320, 302, 301, 334, 390, 330, 320]
         },
-        legend: {
-            data:['资讯','图片','说说','管理员登陆记录']
+        {
+            name: '邮件营销',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'insideRight'
+            },
+            data: [120, 132, 101, 134, 90, 230, 210]
         },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+        {
+            name: '联盟广告',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'insideRight'
+            },
+            data: [220, 182, 191, 234, 290, 330, 310]
         },
-        color: ['#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
-
-            '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-
-            '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'],
-        toolbox: {
-            feature: {
-                saveAsImage: {}
-            }
+        {
+            name: '视频广告',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'insideRight'
+            },
+            data: [150, 212, 201, 154, 190, 330, 410]
         },
-        xAxis: {
-            type: 'category',
-            //boundaryGap: false,
-            data:["2018-02-26","2018-02-27","2018-02-28","2018-03-01","2018-03-02","2018-03-03","2018-03-04"]
-        },
-        yAxis: {
-            type: 'value',
-            //boundaryGap: false,
-            //data:['1','2','3','4','5','6','7']
-        },
-
-        series: [
-            {
-                name:'资讯',
-                type:'line',
-                stack: '总量',
-
-                data:[5,3,6,8,3,2,4]                },
-            {
-                name:'图片',
-                type:'line',
-                stack: '总量',
-                data:[2,4,6,5,6,7,8]                },
-            {
-                name:'说说',
-                type:'line',
-                stack: '总量',
-                data:[3,5,8,2,4,9,10]                },
-            {
-                name:'管理员登陆记录',
-                type:'line',
-                stack: '总量',
-                data:[5,6,8,7,9,10,1]                }
-        ]
-    };
+        {
+            name: '搜索引擎',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                show: true,
+                position: 'insideRight'
+            },
+            data: [820, 832, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+};
 
 
     // 使用刚指定的配置项和数据显示图表。

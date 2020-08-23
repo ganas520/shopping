@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flight.china.dao.TbOrderMapper">
+  <resultMap id="BaseResultMap" type="com.flight.china.bean.TbOrder">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="order_source" jdbcType="VARCHAR" property="orderSource" />
+    <result column="system_order_status" jdbcType="VARCHAR" property="systemOrderStatus" />
+    <result column="financial_status" jdbcType="VARCHAR" property="financialStatus" />
+    <result column="stock_status" jdbcType="VARCHAR" property="stockStatus" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="goods_amount" jdbcType="VARCHAR" property="goodsAmount" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="source_order_code" jdbcType="VARCHAR" property="sourceOrderCode" />
+    <result column="source_goods_code" jdbcType="VARCHAR" property="sourceGoodsCode" />
+    <result column="purchase_count" jdbcType="VARCHAR" property="purchaseCount" />
+    <result column="order_goods_remarks" jdbcType="VARCHAR" property="orderGoodsRemarks" />
+    <result column="order_express_remarks" jdbcType="VARCHAR" property="orderExpressRemarks" />
+    <result column="buyer_name" jdbcType="VARCHAR" property="buyerName" />
+    <result column="buyer_phone" jdbcType="VARCHAR" property="buyerPhone" />
+    <result column="buyer_clearance_code" jdbcType="VARCHAR" property="buyerClearanceCode" />
+    <result column="labers" jdbcType="VARCHAR" property="labers" />
+    <result column="shipped_count" jdbcType="VARCHAR" property="shippedCount" />
+    <result column="consignee_name" jdbcType="VARCHAR" property="consigneeName" />
+    <result column="fixed_phone" jdbcType="VARCHAR" property="fixedPhone" />
+    <result column="buyer_address" jdbcType="VARCHAR" property="buyerAddress" />
+    <result column="surplus_stock" jdbcType="VARCHAR" property="surplusStock" />
+    <result column="belong_sale" jdbcType="VARCHAR" property="belongSale" />
+    <result column="domestic_logistics_number" jdbcType="VARCHAR" property="domesticLogisticsNumber" />
+    <result column="internatinnal_logistics_number" jdbcType="VARCHAR" property="internatinnalLogisticsNumber" />
+    <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    where 1 = 1
+  	  <if test="id != null">
+      and  orders.id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="supplierName != null">
+      and  orders.supplier_name = #{supplierName,jdbcType=VARCHAR}
+      </if>
+      <if test="orderCode != null">
+      and  orders.order_code = #{orderCode,jdbcType=VARCHAR}
+      </if>
+      <if test="currency != null">
+      and  orders.currency = #{currency,jdbcType=VARCHAR}
+      </if>
+      <if test="orderSource != null">
+      and  orders.order_source = #{orderSource,jdbcType=VARCHAR}
+      </if>
+      <if test="systemOrderStatus != null">
+      and  orders.system_order_status = #{systemOrderStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="financialStatus != null">
+      and  orders.financial_status = #{financialStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="stockStatus != null">
+      and  orders.stock_status = #{stockStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+      and  orders.create_time = #{createTime,jdbcType=VARCHAR}
+      </if>
+      <if test="goodsAmount != null">
+      and  orders.goods_amount = #{goodsAmount,jdbcType=DECIMAL}
+      </if>
+      <if test="goodsId != null">
+      and  orders.goods_id = #{goodsId,jdbcType=INTEGER}
+      </if>
+      <if test="country != null">
+      and  orders.country = #{country,jdbcType=VARCHAR}
+      </if>
+      <if test="sourceOrderCode != null">
+      and  orders.source_order_code = #{sourceOrderCode,jdbcType=VARCHAR}
+      </if>
+      <if test="sourceGoodsCode != null">
+      and  orders.source_goods_code = #{sourceGoodsCode,jdbcType=VARCHAR}
+      </if>
+      <if test="purchaseCount != null">
+      and  orders.purchase_count = #{purchaseCount,jdbcType=VARCHAR}
+      </if>
+      <if test="orderGoodsRemarks != null">
+      and  orders.order_goods_remarks = #{orderGoodsRemarks,jdbcType=VARCHAR}
+      </if>
+      <if test="orderExpressRemarks != null">
+      and  orders.order_express_remarks = #{orderExpressRemarks,jdbcType=VARCHAR}
+      </if>
+      <if test="buyerName != null">
+      and  orders.buyer_name = #{buyerName,jdbcType=VARCHAR}
+      </if>
+      <if test="buyerPhone != null">
+      and  orders.buyer_phone = #{buyerPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="buyerClearanceCode != null">
+      and  orders.buyer_clearance_code = #{buyerClearanceCode,jdbcType=VARCHAR}
+      </if>
+      <if test="labers != null">
+      and  orders.labers = #{labers,jdbcType=VARCHAR}
+      </if>
+      <if test="shippedCount != null">
+      and  orders.shipped_count = #{shippedCount,jdbcType=VARCHAR}
+      </if>
+      <if test="consigneeName != null">
+      and  orders.consignee_name = #{consigneeName,jdbcType=VARCHAR}
+      </if>
+      <if test="fixedPhone != null">
+      and  orders.fixed_phone = #{fixedPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="buyerAddress != null">
+      and  orders.buyer_address = #{buyerAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="surplusStock != null">
+      and  orders.surplus_stock = #{surplusStock,jdbcType=VARCHAR}
+      </if>
+      <if test="belongSale != null">
+      and  orders.belong_sale = #{belongSale,jdbcType=VARCHAR}
+      </if>
+      <if test="domesticLogisticsNumber != null">
+      and  orders.domestic_logistics_number = #{domesticLogisticsNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="internatinnalLogisticsNumber != null">
+      and  orders.internatinnal_logistics_number = #{internatinnalLogisticsNumber,jdbcType=VARCHAR}
+      </if>
+      
+  </sql>
+  
+  
+  <sql id="Update_By_Example_Where_Clause">
+   
+  </sql>
+  
+  
+  <sql id="Base_Column_List">
+    orders.id, orders.order_code, orders.currency, orders.order_source, orders.system_order_status, orders.financial_status, orders.stock_status, 
+    orders.create_time, orders.goods_amount, orders.goods_id, orders.country, orders.source_order_code, orders.source_goods_code, 
+    orders.purchase_count, orders.order_goods_remarks, orders.order_express_remarks, orders.buyer_name, orders.buyer_phone, 
+    orders.buyer_clearance_code, orders.labers, orders.shipped_count, orders.consignee_name, orders.fixed_phone, orders.buyer_address, 
+    orders.surplus_stock, orders.belong_sale, orders.domestic_logistics_number, orders.internatinnal_logistics_number,orders.supplier_name,goods.goods_name_chinese
+  </sql>
+  
+  <!-- 查询订单数据 -->
+  <select id="selectByExample" parameterType="com.flight.china.bean.TbOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order orders left join tb_goods goods on orders.goods_id = goods.id
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+      order by orders.create_time DESC
+    <if test="startWith != null and rows != null">
+       <include refid="Common.pagingEnd"/>  
+    </if>
+  </select>
+  <!-- end -->
+  
+  
+  
+  <select id="getOrdersLike" parameterType="com.flight.china.bean.TbOrder" resultMap="BaseResultMap">
+     select
+    <include refid="Base_Column_List" />
+    from tb_order orders left join tb_goods goods on orders.goods_id = goods.id
+    where 1=1
+    <if test="orderCode != null and orderCode != null">
+    and orders.order_code like  CONCAT(CONCAT('%', #{orderCode}), '%')
+    </if>
+    <if test="buyerName != null and buyerName != null">
+    and orders.buyer_name like  CONCAT(CONCAT('%', #{buyerName}), '%')
+    </if>
+    <if test="supplierName != null and supplierName != null">
+    and orders.supplier_name like  CONCAT(CONCAT('%', #{supplierName}), '%')
+    </if>
+    <if test="systemOrderStatus != null and systemOrderStatus != null">
+    and orders.system_order_status = #{systemOrderStatus}
+    </if>
+    <if test="createTime != null and createTime != null">
+    and date_format(orders.create_time,'%Y-%m-%d') between #{createTime} and #{updateTime}
+    <!-- CONCAT(CONCAT('(', create_time &gt;= #{createTime} or create_time &lt;= #{updateTime}), ')')-->
+    </if>
+     order by orders.create_time DESC
+	<if test="startWith != null and rows != null">
+       <include refid="Common.pagingEnd"/>  
+    </if>
+ 	</select>
+  
+   <select id="getOrdersLikeCount" parameterType="com.flight.china.bean.TbOrder" resultType="java.lang.Integer">
+     select
+    count(*)
+    from tb_order
+    where 1=1
+    <if test="orderCode != null and orderCode != null">
+    and order_code like  CONCAT(CONCAT('%', #{orderCode}), '%')
+    </if>
+    <if test="buyerName != null and buyerName != null">
+    and buyer_name like  CONCAT(CONCAT('%', #{buyerName}), '%')
+    </if>
+    <if test="supplierName != null and supplierName != null">
+    and supplier_name like  CONCAT(CONCAT('%', #{supplierName}), '%')
+    </if>
+    <if test="systemOrderStatus != null and systemOrderStatus != null">
+    and system_order_status = #{systemOrderStatus,jdbcType=VARCHAR}
+    </if>
+     <if test="createTime != null and createTime != null">
+    and date_format(create_time,'%Y-%m-%d') between #{createTime} and #{updateTime}
+    <!-- CONCAT(CONCAT('(', create_time &gt;= #{createTime} or create_time &lt;= #{updateTime}), ')')-->
+    </if>
+     order by create_time DESC
+
+ 	</select>
+  
+  
+    <!-- 查询订单数据 -->
+  <select id="getOrderMessage" parameterType="com.flight.china.bean.TbOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_order orders left join tb_goods goods on orders.goods_id = goods.id
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+      order by create_time DESC
+
+  </select>
+  <!-- end -->
+  
+  
+  <delete id="deleteByExample" parameterType="com.flight.china.bean.TbOrderExample">
+    delete from tb_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.flight.china.bean.TbOrder">
+    insert into tb_order ( order_code, currency, 
+      order_source, system_order_status, financial_status, 
+      stock_status, create_time, goods_amount, 
+      country, source_order_code, 
+      source_goods_code, purchase_count, order_goods_remarks, 
+      order_express_remarks, buyer_name, buyer_phone, 
+      buyer_clearance_code, labers, shipped_count, 
+      consignee_name, fixed_phone, buyer_address, 
+      surplus_stock, belong_sale, domestic_logistics_number, 
+      internatinnal_logistics_number,supplier_name)
+    values ( #{orderCode,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, 
+      #{orderSource,jdbcType=VARCHAR}, #{systemOrderStatus,jdbcType=VARCHAR}, #{financialStatus,jdbcType=VARCHAR}, 
+      #{stockStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},#{goodsAmount,jdbcType=VARCHAR},
+      #{country,jdbcType=VARCHAR}, #{sourceOrderCode,jdbcType=VARCHAR}, 
+      #{sourceGoodsCode,jdbcType=VARCHAR}, #{purchaseCount,jdbcType=VARCHAR}, #{orderGoodsRemarks,jdbcType=VARCHAR}, 
+      #{orderExpressRemarks,jdbcType=VARCHAR}, #{buyerName,jdbcType=VARCHAR}, #{buyerPhone,jdbcType=VARCHAR}, 
+      #{buyerClearanceCode,jdbcType=VARCHAR}, #{labers,jdbcType=VARCHAR}, #{shippedCount,jdbcType=VARCHAR}, 
+      #{consigneeName,jdbcType=VARCHAR}, #{fixedPhone,jdbcType=VARCHAR}, #{buyerAddress,jdbcType=VARCHAR}, 
+      #{surplusStock,jdbcType=VARCHAR}, #{belongSale,jdbcType=VARCHAR}, #{domesticLogisticsNumber,jdbcType=VARCHAR}, 
+      #{internatinnalLogisticsNumber,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  <select id="getOrdersCount" parameterType="com.flight.china.bean.TbOrder" resultType="java.lang.Integer">
+    select
+    count(*)
+    from tb_order orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+      order by create_time DESC
+  </select>
+  
+  
+  <update id="updateByExample" parameterType="map">
+    update tb_order
+	<set>
+		<if test="supplierName != null">
+		supplier_name = #{supplierName,jdbcType=VARCHAR},
+		</if>
+		<if test="orderCode != null">
+		order_code = #{orderCode,jdbcType=VARCHAR},
+		</if>
+		<if test="currency != null">
+		currency = #{currency,jdbcType=VARCHAR},
+		</if>
+		<if test="orderSource != null">
+		order_source = #{orderSource,jdbcType=VARCHAR},
+		</if>
+		<if test="systemOrderStatus != null">
+		system_order_status = #{systemOrderStatus,jdbcType=VARCHAR},
+		</if>
+		<if test="financialStatus != null">
+		financial_status = #{financialStatus,jdbcType=VARCHAR},
+		</if>
+		<if test="stockStatus != null">
+		stock_status = #{stockStatus,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="goodsAmount != null">
+		goods_amount = #{goodsAmount,jdbcType=DECIMAL},
+		</if>
+		<if test="goodsId != null">
+		goods_id = #{goodsId,jdbcType=INTEGER},
+		</if>
+		<if test="country != null">
+		country = #{country,jdbcType=VARCHAR},
+		</if>
+		<if test="sourceOrderCode != null">
+		source_order_code = #{sourceOrderCode,jdbcType=VARCHAR},
+		</if>
+		<if test="sourceGoodsCode != null">
+		source_goods_code = #{sourceGoodsCode,jdbcType=VARCHAR},
+		</if>
+		<if test="purchaseCount != null">
+		purchase_count = #{purchaseCount,jdbcType=VARCHAR},
+		</if>
+		<if test="orderGoodsRemarks != null">
+		order_goods_remarks = #{orderGoodsRemarks,jdbcType=VARCHAR},
+		</if>
+		<if test="orderExpressRemarks != null">
+		order_express_remarks = #{orderExpressRemarks,jdbcType=VARCHAR},
+		</if>
+		<if test="buyerName != null">
+		buyer_name = #{buyerName,jdbcType=VARCHAR},
+		</if>
+		<if test="buyerPhone != null">
+		buyer_phone = #{buyerPhone,jdbcType=VARCHAR},
+		</if>
+		<if test="buyerClearanceCode != null">
+		buyer_clearance_code = #{buyerClearanceCode,jdbcType=VARCHAR},
+		</if>
+		<if test="labers != null">
+		labers = #{labers,jdbcType=VARCHAR},
+		</if>
+		<if test="shippedCount != null">
+		shipped_count = #{shippedCount,jdbcType=VARCHAR},
+		</if>
+		<if test="consigneeName != null">
+		consignee_name = #{consigneeName,jdbcType=VARCHAR},
+		</if>
+		<if test="fixedPhone != null">
+		fixed_phone = #{fixedPhone,jdbcType=VARCHAR},
+		</if>
+		<if test="buyerAddress != null">
+		buyer_address = #{buyerAddress,jdbcType=VARCHAR},
+		</if>
+		<if test="surplusStock != null">
+		surplus_stock = #{surplusStock,jdbcType=VARCHAR},
+		</if>
+		<if test="belongSale != null">
+		belong_sale = #{belongSale,jdbcType=VARCHAR},
+		</if>
+		<if test="domesticLogisticsNumber != null">
+		domestic_logistics_number = #{domesticLogisticsNumber,jdbcType=VARCHAR},
+		</if>
+		<if test="internatinnalLogisticsNumber != null">
+		internatinnal_logistics_number = #{internatinnalLogisticsNumber,jdbcType=VARCHAR}
+      </if>
+	</set>
+	where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

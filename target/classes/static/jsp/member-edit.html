@@ -114,11 +114,12 @@
         var id = "";
         
         
-        $(function(){
+        function getData(){
         	var url = window.location.search;
 			id = url.split('=')[1];
 			var s = {};
 			s.id = id;
+			var data;
 			$.ajax({
        		    //请求方式
        		    type : "POST",
@@ -128,19 +129,14 @@
        		    url : "/Shopping/getAllUserMessage",
        		    //数据，json字符串
        		    data : JSON.stringify(s),
+       		    async : false,
        		    //请求成功
        		    success : function(result) {
        		        if(result.code == 1){
        		        	console.log('系统错误，请联系管理员!!!'); 
        		        }else if(result.code == 0){
-       		        	var data = result.data[0];
-       		        	userName = data.userName;
-       		        	userCode = data.userCode;
-       		        	userPhone = data.userPhone;
-       		        	userEmail = data.userEmail;
-       		        	userAdress = data.userAdress;
-       		        	userSex = data.userSex;
-       		        	remarks = data.remarks;
+       		        	data = result.data[0];
+       		        	
        		        }else{
        		        	console.log('系统错误，请联系管理员!!!');
        		        }
@@ -151,10 +147,11 @@
        		        console.log(e.responseText);
        		    }
        		});
-			
-        });
+			return data;
+        }
 
             layui.use(['form','layer'], function(){
+            	var data = getData();
                 $ = layui.jquery;
               var form = layui.form
               ,layer = layui.layer;
@@ -197,13 +194,13 @@
                });
               //监听提交
                form.val('example', {
-              "userName": userName // "name": "value"
-              ,"userCode": userCode
-              ,"userPhone":userPhone
-              ,"userEmail": userEmail
-              ,"userSex": userSex
-              ,"userAdress": userAdress
-              ,"remarks": remarks
+              "userName": data.userName // "name": "value"
+              ,"userCode": data.userCode
+              ,"userPhone":data.userPhone
+              ,"userEmail": data.userEmail
+              ,"userSex": data.userSex 
+              ,"userAdress": data.userAdress
+              ,"remarks": data.remarks
             });
               
               

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        文章添加
+    </title>
+    <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../css/x-admin.css" media="all">
+
+</head>
+<body>
+<div class="x-nav">
+            <span class="layui-breadcrumb">
+              <a><cite>首页</cite></a>
+              <a><cite>订单管理</cite></a>
+              <a><cite>订单列表</cite></a>
+            </span>
+</div>
+<div class="x-body">
+    <form class="layui-form layui-form-pane" action="" id="add">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">订单信息</li>
+            </ul>
+
+            <div class="layui-tab-content" >
+                <div class="layui-tab-item layui-show">
+                    <!--<form class="layui-form layui-form-pane" action="" id="add">-->
+                    <input type="hidden" name="id" value="{$art.id}">
+                    
+					 <div class="layui-form-item">
+	    				<label class="layui-form-label" >电商平台</label>
+					    <div class="layui-input-block" style="width:500px" >
+					      <select name="shopName" lay-filter="shopName" lay-verify="required" >
+					        <option value=""></option>
+					        <option value="11街">11街</option>
+					        <option value="coupang">coupang</option>
+					      </select>
+					    </div>
+			  		</div>
+			  		
+			  		 <div class="layui-inline">
+				      <label class="layui-form-label">年月选择器</label>
+				      <div class="layui-input-inline" style="width:500px">
+				        <input type="text" class="layui-input" id="yearMonth" placeholder="yyyy-MM" lay-verify="required">
+				      </div>
+				    </div>
+
+                    <div style="height:50px;"></div>
+				<div class="layui-form-item">
+                        <button class="layui-btn" id="sendSmsBtn"  type="button" lay-filter="add" lay-submit="">
+                            保存
+                        </button>
+                    </div>
+
+                    <!--</form>-->
+                </div>
+                
+               
+
+            </div>
+
+        </div>
+    </form>
+</div>
+ <script src="../layui/layui.js" charset="utf-8">
+        </script>
+        <script src="../js/x-layui.js" charset="utf-8">
+        </script>
+       <script src="../js/jquery.min.js"></script>
+<script>
+
+	var shopName = "";
+	var yearMonth = "";
+    layui.use(['element','layer','form','upload','laydate'], function(){
+        $ = layui.jquery;//jquery
+        lement = layui.element;//面包导航
+        layer = layui.layer;//弹出层
+        form = layui.form;
+        upload = layui.upload;
+        laydate = layui.laydate;
+		
+
+      //年月选择器
+        laydate.render({
+          elem: '#yearMonth'
+          ,type: 'month'
+        });
+        
+        form.on('select(shopName)', function (data) {        //对应lay-filter
+        		shopName= data.elem[data.elem.selectedIndex].text;;    //获取显示的值
+        });
+        
+		
+        //监听提交
+        form.on('submit(add)', function(data){
+        	var s = {};
+        	var loading = layer.load(0, {
+                shade: false
+            });
+        	$('#sendSmsBtn').addClass("layui-btn-disabled").attr("disabled",true);
+			s.shopName = shopName;
+			yearMonth = $('#yearMonth').val();
+			console.log(yearMonth);
+			console.log(shopName);
+			$.ajax({
+       		    //请求方式
+       		    type : "POST",
+       		    //请求的媒体类型
+       		    contentType: "application/json;charset=UTF-8",
+       		    //请求地址
+       		    url : "/Shopping/insertOrders?shopName="+shopName+"&yearMonth="+yearMonth,
+       		    //数据，json字符串
+       		    data : JSON.stringify(s),
+       		 	async: true, 
+       		    //请求成功
+       		    success : function(result) {
+       		    		layer.close(loading);
+       		        	layer.msg('新增订单成功', function (){
+       		            	 var index = parent.layer.getFrameIndex(window.name);
+        	                    //关闭当前frame
+        	                    parent.layer.close(index);
+       		             }
+       		           );
+       	                   
+       		    },
+       		    //请求失败，包含具体的错误信息
+       		    error : function(e){
+       		    	layui.msg('订单新增失败，请联系管理员！！！');
+       		        console.log(e.status);
+       		        console.log(e.responseText);
+       		    }
+       		}); 
+                
+            
+            return false;
+
+        });
+
+    })
+</script>
+<!--栏目缩略图上传-->
+<script>
+    function upload(obj,id){
+        var formData = new FormData();
+        formData.append('images', $('#previewImg')[0].files[0]);
+        formData.append('id', id);//将id追加再id中
+        layer.msg('图片上传中', {icon: 16});
+        $.ajax({
+            type:"post",
+            processData: false,
+            contentType: false,
+            url:"",
+            data:formData,
+            success:function(data){
+                if(data.status == 1){
+                    console.log("data:"+data.image_name);
+                    layer.closeAll('loading');
+                    //layer.msg(data.info,{icon:1,time:1000});
+                    $("#pimages").attr('src',data.image_name);
+                    $("#avatar").val(data.image_name);
+                    $(".imgs").show();
+                    return false;
+                }else{
+                    layer.msg(data.info,{icon:2,time:1000});
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

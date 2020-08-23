@@ -26,44 +26,46 @@
     <form class="layui-form x-left" action="" style="width:100%">
         <div class="layui-form-pane" style="margin-top: 15px;">
             <div class="layui-form-item">
-                <label class="layui-form-label" style="width:5%">更新时间</label>
+                <label class="layui-form-label" style="width:5%">创建时间</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-                </div>
-                <div class="layui-input-inline">
-                    <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-                </div>
-				<label class="layui-form-label" style="width:5%">创建时间</label>
-                <div class="layui-input-inline">
-                    <input class="layui-input" placeholder="开始日" id="LAY_demorange_ss">
-                </div>
-                <div class="layui-input-inline">
-                    <input class="layui-input" placeholder="截止日" id="LAY_demorange_ee">
-                </div>
+        			<input type="text" class="layui-input" id="createTimeSearch" placeholder="~">
+      			</div>
 				<label class="layui-form-label" style="width:5%">商品编号</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="username"  placeholder="请输入商品编号" autocomplete="off" class="layui-input">
+                    <input type="text" id="goodsCodeSearch" name="goodsCodeSearch"  placeholder="请输入商品编号" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item">
 				<label class="layui-form-label" style="width:5%">商品名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="username"  placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="goodsNameSearch" id="goodsNameSearch"  placeholder="请输入商品名称" autocomplete="off" class="layui-input">
                 </div>
+                
 				<label class="layui-form-label" style="width:5%">供应商名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="username"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="username" id="supplierNameSearch"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
                 </div>
-				<label class="layui-form-label" style="width:5%">商品状态</label>
+                
+				<label class="layui-form-label" >商品状态</label>
+				    <div class="layui-input-inline" style="width:120px" >
+				      <select id = "goodsStatusSearch" name="goodsStatusSearch" lay-filter="goodsStatusSearch" lay-verify="required" >
+				        <option value=""></option>
+				        <option value="待翻译">待翻译</option>
+				        <option value="待做图">待做图</option>
+				        <option value="待上架">待上架</option>
+				        <option value="已上架">已上架</option>
+				      </select>
+				    </div>
+                
                 
                 <div class="layui-input-inline" style="width:80px">
-                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                    <button type="button" onclick="sreach()" class="layui-btn" ><i class="layui-icon">&#xe615;</i></button>
                 </div>
                 </div>
             </div>
         </div>
     </form>
     <xblock>
-        <button class="layui-btn" onclick="member_add('添加文章','goods-add.html','800','700')"><i class="layui-icon">&#xe608;</i>添加</button>
+        <button class="layui-btn" onclick="member_add('添加商品','goods-add.html','800','750')"><i class="layui-icon">&#xe608;</i>添加</button>
    <table lay-filter="demo">
   <thead>
     <tr>
@@ -71,9 +73,10 @@
       <th lay-data="{field:'goodsCode', width:80}">商品编号(상품번호)</th>
       <th lay-data="{field:'goodsLabel', width:80}">标签(태그)</th>
       <th lay-data="{field:'goodsNameChinese', width:80}">商品名称(상품명)</th>
-      <th lay-data="{field:'createTime', width:80 ,templet:'#createDateTpl'}" >创建时间(만든시간)</th>
+      <th lay-data="{field:'createTime', width:80 }" >创建时间(만든시간)</th>
       <th lay-data="{field:'supplierName', width:80}">供应商简称(공급자)</th>
-      <th lay-data="{field:'updateTime', width:80 ,templet:'#updateDateTpl'}">更新时间(갱신시간)</th>
+<!-- <th lay-data="{field:'updateTime', width:80 ,templet:'#updateDateTpl'}">更新时间(갱신시간)</th>-->
+	  <th lay-data="{field:'updateTime', width:80 }">更新时间(갱신시간)</th>
       <th lay-data="{field:'goodsStatus', width:80}">商品状态(상품상태)</th>
       <th lay-data="{field:'', width:60, toolbar: '#barDemo'}">操作(작업)</th>
     </tr> 
@@ -84,10 +87,11 @@
             
 <div id="test1"></div>
 <script type="text/html" id="createDateTpl">
-{{layui.util.toDateString(new Date(d.createTime).getTime(), "yyyy-MM-dd HH:mm:ss") }}
+
+return layui.util.toDateString(new Date(Date.parse(d.createTime.replace(/-/g, "/"))), "yyyy-MM-dd HH:mm:ss")}}}
 </script>
 <script type="text/html" id="updateDateTpl">
-{{layui.util.toDateString(new Date(d.updateTime).getTime(), "yyyy-MM-dd HH:mm:ss") }}
+{{# if(d.updateTime != null){return layui.util.toDateString(d.updateTime, "yyyy-MM-dd HH:mm:ss")}}}
 </script>
 <script type="text/html" id="barDemo">
 	<a title="编辑" href="javascript:;" lay-event="edit"  class="ml-5" style="text-decoration:none">
@@ -102,12 +106,27 @@
         <script src="../js/x-layui.js" charset="utf-8"></script>
         <script src="../js/jquery.min.js"></script>
 <script>
+var goodsStatus = "";
 layui.use(['laydate','element','layer','table'], function(){
     $ = layui.jquery;//jquery
 	laydate = layui.laydate;//日期插件
 	lement = layui.element;//面包导航
 	layer = layui.layer;//弹出层
 	table = layui.table;
+	laydate = layui.laydate;
+	form = layui.form;
+	
+	form.on('select(goodsStatusSearch)', function (data) {        //对应lay-filter
+		goodsStatus= data.elem[data.elem.selectedIndex].text;;    //获取显示的值
+	});
+	
+	
+	laydate.render({
+	    elem: '#createTimeSearch'
+	    ,range: '~'
+	    
+	  });
+	
 	//转换静态表格
 	tableIns = table.init('demo', {
 		//支持所有基础参数
@@ -130,7 +149,7 @@ layui.use(['laydate','element','layer','table'], function(){
 	table.on('tool(demo)', function(obj){
 		var data = obj.data;
 		if(obj.event === 'edit'){
-			openPage('.html','编辑',610,610,data.id);
+			openPage('goods-edit.html','编辑',800,750,data.id);
 		} else if(obj.event === 'del'){
 		var s = {};
 		s.id = data.id;
@@ -141,7 +160,7 @@ layui.use(['laydate','element','layer','table'], function(){
 	    //请求的媒体类型
 	    contentType: "application/json;charset=UTF-8",
 	    //请求地址
-	    url : "/Shopping/deleteUser",
+	    url : "/Shopping/deleteGoods",
 	    //数据，json字符串
 	    data : JSON.stringify(s),
 	    //请求成功
@@ -151,27 +170,27 @@ layui.use(['laydate','element','layer','table'], function(){
 	        if(result.code == 1){
 	        	console.log('系统错误，请联系管理员!!!'); 
 	        }else if(result.code == 0){
-	        	layer.alert("删除成功", {icon: 6,closeBtn: 0},function () {
-                  layer.close(layer.index);
-               var recodePage = $(".layui-laypage-skip .layui-input").val()
-			table.reload('tableDemo', {
-               page: {
-                 curr: recodePage 
-               }
-       });
-              });
-	        }else{
-	        	console.log('系统错误，请联系管理员!!!');
-	        }
-	    },
-	    //请求失败，包含具体的错误信息
-	    error : function(e){
-	        console.log(e.status);
-	        console.log(e.responseText);
-	    }
-	}); 
-  });
-}
+		        	layer.alert("删除成功", {icon: 6,closeBtn: 0},function () {
+	                  layer.close(layer.index);
+	               var recodePage = $(".layui-laypage-skip .layui-input").val()
+				table.reload('tableDemo', {
+	               page: {
+	                 curr: recodePage 
+	               }
+	       });
+	              });
+		        }else{
+		        	console.log('系统错误，请联系管理员!!!');
+		        }
+		    },
+		    //请求失败，包含具体的错误信息
+		    error : function(e){
+		        console.log(e.status);
+		        console.log(e.responseText);
+		    }
+		}); 
+	  });
+	}
 });
   
   
@@ -253,27 +272,60 @@ layui.use(['laydate','element','layer','table'], function(){
            });}
     	});
     }
-    /*用户-查看*/
-    function member_show(title,url,id,w,h){
-        x_admin_show(title,url,w,h);
-    }
 
-    // 用户-编辑
-    function member_edit (title,url,id,w,h) {
-        x_admin_show(title,url,w,h);
+    function sreach(){
+    	var url = "";
+    	var goodsCode = $("#goodsCodeSearch").val();
+    	var goodsNameChinese = $("#goodsNameSearch").val();
+    	console.log("goodsNameChinese:"+goodsNameChinese);
+    	var supplierName = $("#supplierNameSearch").val();
+    	var goodsStatus = $("#goodsStatusSearch").val();
+    	var createTime = $("#createTimeSearch").val().split("~")[0];
+    	var updateTime = $("#createTimeSearch").val().split("~")[1];
+    	if(goodsCode != null && goodsCode != ""){
+    		url += "?goodsCode="+goodsCode;
+    	}
+    	if(goodsNameChinese != null && goodsNameChinese != ""){
+    		if(url != ''){
+    			url += "&goodsNameChinese="+goodsNameChinese;
+    		}else{
+	    		url += "?goodsNameChinese="+goodsNameChinese;
+    		}
+    	}
+    	if(supplierName != null && supplierName != ""){
+    		
+    		if(url != ''){
+    			url += "&supplierName="+supplierName;
+    		}else{
+    			url += "?supplierName="+supplierName;
+    		}
+    	}
+    	if(goodsStatus != null && goodsStatus != ""){
+    		if(url != ''){
+    			url += "&goodsStatus="+goodsStatus;
+    		}else{
+    			url += "?goodsStatus="+goodsStatus;
+    		}
+    	}
+    	if(createTime != null && createTime != ""){
+    		if(url != ''){
+    			url += "&createTime="+createTime+"&updateTime="+updateTime;
+    		}else{
+    			url += "?createTime="+createTime+"&updateTime="+updateTime;
+    		}
+    	}
+    	console.log(createTime);
+    	console.log(updateTime);
+    	/*   createTimeSearch goodsCodeSearch goodsNameSearch supplierNameSearch goodsStatusSearch*/
+    	tableIns = table.init('demo', {
+    		   //支持所有基础参数
+    		   url: '/Shopping/getAllGoodsLike'+url
+    		   ,page:true
+    		   ,limit:10
+    		   ,id:'tableDemo'
+    		 }); 
     }
-    /*密码-修改*/
-    function member_password(title,url,id,w,h){
-        x_admin_show(title,url,w,h);
-    }
-    /*用户-删除*/
-    function member_del(obj,id){
-        layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
-        });
-    }
+    
 </script>
 
 </body>

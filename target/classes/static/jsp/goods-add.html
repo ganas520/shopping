@@ -34,9 +34,10 @@
                 <div class="layui-tab-item layui-show">
                     <!--<form class="layui-form layui-form-pane" action="" id="add">-->
                     <input type="hidden" name="id" value="{$art.id}">
+                    
                     <div class="layui-form-item">
-                         <label class="layui-form-label" style="width: 100px;">
-                            <span class="x-red">*</span>请先上传图片
+                         <label class="layui-form-label" >
+                            <span class="x-red">*</span>请上传图片
                         </label>
                         
                         
@@ -44,33 +45,43 @@
                                     <button type="button" class="layui-btn" id="test1">
                                         <i class="layui-icon">&#xe67c;</i>上传图片
                                     </button>
+										<span style="color:red;position: absolute;left: 260px;top: 130px;">图片格式:jpg、jpeg、png、bmp</span>
                                     <div class="layui-upload-list">
     									<img class="layui-upload-img" id="demo1" style="width: 300px;">
     										<p id="demoText"></p>
   									</div>
                                 </div>
-
                     </div>
 
+					<div class="layui-form-item">
+                        <label class="layui-form-label" >
+                            商品名称(中)
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="goodsNameChinese" name="goodsNameChinese" required   autocomplete="off"  class="layui-input" lay-verify="required|goodsNameChinese">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" >
+                            商品名称(韩)
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="goodsNameKorean" name="goodsNameKorean" required   autocomplete="off"  class="layui-input" lay-verify="goodsNameKorean">
+                    </div>
+                </div>
+					
 
                     <!--</form>-->
                     <div style="height:100px;"></div>
                 </div>
                 <div class="layui-tab-item">
                     <!--  <form class="layui-form layui-form-pane" action="" id="add">-->
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">
-                            商品标签
-                        </label>
-                      <div class="layui-input-inline">
-                        <input type="text" id="goodsLabel" name="goodsLabel" required   autocomplete="off"  class="layui-input" lay-verify="required|goodsLabel">
-                    </div>
-                </div>
                 
                 <div class="layui-form-item">
-    				<label class="layui-form-label">状态</label>
-				    <div class="layui-input-block">
-				      <select name="interest" lay-filter="aihao">
+    				<label class="layui-form-label" >状态</label>
+				    <div class="layui-input-block" style="width:500px" >
+				      <select name="goodsStatus" lay-filter="goodsStatus" lay-verify="required" >
 				        <option value=""></option>
 				        <option value="0">待翻译</option>
 				        <option value="1">待做图</option>
@@ -81,51 +92,85 @@
 			  	</div>
                 
 				<div class="layui-form-item">
-                        <label class="layui-form-label">
+                        <label class="layui-form-label" >
                             供应商简称
                         </label>
                       <div class="layui-input-inline">
-                        <input type="text" id="supplierName" name="supplierName" required   autocomplete="off"  class="layui-input" lay-verify="required|supplierName">
+                        <input style="width:500px" type="text" id="supplierName" name="supplierName" required   autocomplete="off"  class="layui-input" lay-verify="required|supplierName">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" >
+                            标签
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="goodsLabel" name="goodsLabel" required   autocomplete="off"  class="layui-input" lay-verify="required|goodsLabel">
                     </div>
                 </div>
                 
                     <div class="layui-form-item">
-                        <label class="layui-form-label">
+                        <label class="layui-form-label" >
                             产品归属
                         </label>
                       <div class="layui-input-inline">
-                        <input type="text" id="productOwnership" name="productOwnership" required   autocomplete="off"  class="layui-input" lay-verify="required|productOwnership">
+                        <input style="width:500px" type="text" id="productOwnership" name="productOwnership" required   autocomplete="off"  class="layui-input" lay-verify="required|productOwnership">
                     </div>
                 </div>
                 
                     <div class="layui-form-item">
-                        <label class="layui-form-label">
+                        <label class="layui-form-label" >
                             采购价格
                         </label>
                       <div class="layui-input-inline">
-                        <input type="text" id="purchasePrice" name="purchasePrice" required   autocomplete="off"  class="layui-input" lay-verify="required|purchasePrice">
+                        <input style="width:500px" type="text" id="purchasePrice" name="purchasePrice" required   autocomplete="off"  class="layui-input" lay-verify="required|purchasePrice">
                     </div>
                 </div>
                 
                     <div class="layui-form-item">
-                        <label class="layui-form-label">
+                        <label class="layui-form-label" >
                             物流成本
                         </label>
                       <div class="layui-input-inline">
-                        <input type="text" id="logisticsCost" name="logisticsCost" required   autocomplete="off"  class="layui-input" lay-verify="required|logisticsCost">
+                        <input style="width:500px" type="text" id="logisticsCost" name="logisticsCost" required   autocomplete="off"  class="layui-input" lay-verify="required|logisticsCost">
                     </div>
                 </div>
                 
                     <div class="layui-form-item">
-                        <label class="layui-form-label">
+                        <label class="layui-form-label" >
                             零售价格
                         </label>
                       <div class="layui-input-inline">
-                        <input type="text" id="wholesalePrice" name="wholesalePrice" required   autocomplete="off"  class="layui-input" lay-verify="required|wholesalePrice">
+                        <input style="width:500px" type="text" id="wholesalePrice" name="wholesalePrice" required   autocomplete="off"  class="layui-input" lay-verify="required|wholesalePrice">
                     </div>
                 </div>
 				
+				<div class="layui-form-item">
+                        <label class="layui-form-label" >
+                            境外电商
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="abroadShopping" name="abroadShopping" required   autocomplete="off"  class="layui-input" lay-verify="required|abroadShopping">
+                    </div>
+                </div>
 				
+				<div class="layui-form-item">
+                        <label class="layui-form-label" >
+                            购买链接
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="goodsLink" name="goodsLink" required   autocomplete="off"  class="layui-input" lay-verify="required|goodsLink">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" >
+                            做图链接
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="imageLink" name="imageLink" required   autocomplete="off"  class="layui-input" lay-verify="required|imageLink">
+                    </div>
+                </div>
 
                     <div class="layui-form-item">
                         <button class="layui-btn"  type="button" lay-filter="add" lay-submit="">
@@ -147,19 +192,87 @@
         </script>
        <script src="../js/jquery.min.js"></script>
 <script>
+
+	var imageName = "";
+	var goodsStatus = "";
     layui.use(['element','layer','form','upload'], function(){
         $ = layui.jquery;//jquery
         lement = layui.element;//面包导航
         layer = layui.layer;//弹出层
         form = layui.form;
         upload = layui.upload;
+		
 
+        form.on('select(goodsStatus)', function (data) {        //对应lay-filter
+        		goodsStatus= data.elem[data.elem.selectedIndex].text;;    //获取显示的值
+        });
+        
+        form.verify({
+            
+        	goodsNameChinese: function(value){
+                if(value.length < 1 || value.length >199){
+                  return '商品名称(中)不得为空且不可超过200个字符';
+                }
+            },
+            goodsNameKorean: function(value){
+                if(value.length < 1 || value.length >199){
+                  return '商品名称(韩)不得为空且不可超过200个字符';
+                }
+            },
+            supplierName: function(value){
+                if(value.length <1 || value.length >31){
+                  return '供应商简称不得为空且不得超过32个字符';
+                }
+              },
+              goodsLabel: function(value){
+                  if(value.length <1 || value.length >19){
+                    return '标签不得为空且不得超过20个字符';
+                  }
+                },
+              productOwnership: function(value){
+				if(value.length <1 || value.length >31){
+                 		return '产品归属不得为空且不得超过32个字符';
+				}
+           	 },
+           	purchasePrice: function(value){
+           		if(value.length <1 || value.length >18){
+             		return '采购价格不得为空且不得超过18个字符';
+				}
+            },
+            logisticsCost: function(value){
+            	if(value.length <1 || value.length >18){
+             		return '物流成本不得为空且不得超过18个字符';
+				}
+            },
+            wholesalePrice: function(value){
+            	if(value.length <1 || value.length >18){
+             		return '零售价格不得为空且不得超过18个字符';
+				}
+            },
+            abroadShopping: function(value){
+            	if(value.length <1 || value.length >199){
+             		return '境外电商不得为空且不得超过200个字符';
+				}
+            },
+            goodsLink: function(value){
+            	if(value.length <1 || value.length >199){
+             		return '购买链接不得为空且不得超过200个字符';
+				}
+            },
+            imageLink: function(value){
+            	if(value.length <1 || value.length >199){
+             		return '做图链接不得为空且不得超过200个字符';
+				}
+            }
+            
+          });
 
 
         //图片上传接口
    var uploadInst = upload.render({
     elem: '#test1'
-    ,url: '/Shopping/upload' //改成您自己的上传接口
+    ,exts: 'jpg|jpeg|png|bmp' //只允许上传的文件
+    ,url: '/Shopping/upload' 
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
       obj.preview(function(index, file, result){
@@ -172,7 +285,9 @@
         return layer.msg('上传失败');
       }
       //上传成功
-      console.log(res);
+      imageName = res.msg;
+      console.log('imageName:'+imageName);
+      $('#goodsNameChinese').val(res.data);
     }
     ,error: function(){
       //演示失败状态，并实现重传
@@ -187,42 +302,51 @@
 
         //监听提交
         form.on('submit(add)', function(data){
-            var title=$("input[name='title']").val();
-            //var content=$("textarea[name='content']").val();
-
-            var article_category_id=$('#article_category_id option:selected') .val();//所属文章类型
-            //alert(title);
-            //var form=$("#cate_add").serialize();
-            if(title==""){
-                layer.msg('文章标题不能为空',{icon:5,time:2000});return false;
-            }
-            if(article_category_id==""){
-                layer.msg('文章类型不能为空',{icon:5,time:2000});return false;
-            }
-            /*if(content){
-                layer.msg("文章内容不能为空！",{icon:5,time:2000});return false;
-          }*/
-            var data = data.field;
-            $.ajax({
-                type:"post",
-                url:"",
-                data:data,
-                dataType:"json",
-                success:function(data){
-                    if(data.status==1){
-                        layer.msg(data.info, {icon: 6,time:2000},function () {
-                            window.parent.location.reload();
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
-                        });
-                        return false;
-
-                    }else{
-                        layer.msg(data.info,{icon:5,time:2000});return false;
-                    }
-                }
-
-            });
+        	var s = {};
+			s.goodsNameChinese = $("#goodsNameChinese").val();
+			s.goodsNameKorean = $("#goodsNameKorean").val();
+			s.goodsStatus = goodsStatus;
+			s.supplierName = $("#supplierName").val();
+			s.productOwnership = $("#productOwnership").val();
+			s.purchasePrice = $('#purchasePrice').val();
+			s.logisticsCost = $("#logisticsCost").val();
+			s.wholesalePrice = $('#wholesalePrice').val();
+			s.abroadShopping = $('#abroadShopping').val();
+			s.goodsLink = $('#goodsLink').val();
+			s.imageLink = $('#imageLink').val();
+			s.goodsLabel = $('#goodsLabel').val();
+			s.imageAddress = imageName;
+			$.ajax({
+       		    //请求方式
+       		    type : "POST",
+       		    //请求的媒体类型
+       		    contentType: "application/json;charset=UTF-8",
+       		    //请求地址
+       		    url : "/Shopping/insertGoods",
+       		    //数据，json字符串
+       		    data : JSON.stringify(s),
+       		    //请求成功
+       		    success : function(result) {
+       		        if(result.code == 0){
+       		        	layer.alert("增加成功", {icon: 6,closeBtn: 0},function () {
+       	                    // 获得frame索引
+       	                    var index = parent.layer.getFrameIndex(window.name);
+       	                    //关闭当前frame
+       	                    parent.layer.close(index);
+       	                });
+       		        }else{
+       		        	console.log('系统错误，请联系管理员!!!');
+       		        }
+       		    },
+       		    //请求失败，包含具体的错误信息
+       		    error : function(e){
+       		        console.log(e.status);
+       		        console.log(e.responseText);
+       		    }
+       		}); 
+                
+            
+            return false;
 
         });
 
@@ -243,7 +367,7 @@
             data:formData,
             success:function(data){
                 if(data.status == 1){
-                    console.log(data.image_name);
+                    console.log("data:"+data.image_name);
                     layer.closeAll('loading');
                     //layer.msg(data.info,{icon:1,time:1000});
                     $("#pimages").attr('src',data.image_name);

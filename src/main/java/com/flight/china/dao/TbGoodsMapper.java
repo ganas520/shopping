@@ -11,9 +11,9 @@ import org.apache.ibatis.annotations.Param;
 public interface TbGoodsMapper {
     long countByExample(TbGoodsExample example);
 
-    int deleteByExample(TbGoodsExample example);
+    int deleteByExample(TbGoods tbGoods);
 
-    int insert(TbGoods record);
+    int insert(TbGoods tbGoods);
 
     int insertSelective(TbGoods record);
 
@@ -21,7 +21,9 @@ public interface TbGoodsMapper {
 
     int updateByExampleSelective(@Param("record") TbGoods record, @Param("example") TbGoodsExample example);
 
-    int updateByExample(@Param("record") TbGoods record, @Param("example") TbGoodsExample example);
+    int updateByExample(TbGoods tbGoods);
     
     List<TbGoods> getAllGoods(TbGoods tbGoods);
+    
+    List<TbGoods> getGoodsLike(TbGoods tbGoods);
 }

@@ -30,7 +30,7 @@ public class TbGoods {
 
     private BigDecimal wholesalePrice;
 
-    private String imageAdress;
+    private String imageAddress;
 
     private String goodsLink;
 
@@ -146,12 +146,12 @@ public class TbGoods {
         this.wholesalePrice = wholesalePrice;
     }
 
-    public String getImageAdress() {
-        return imageAdress;
+    public String getImageAddress() {
+        return imageAddress;
     }
 
-    public void setImageAdress(String imageAdress) {
-        this.imageAdress = imageAdress == null ? null : imageAdress.trim();
+    public void setImageAddress(String imageAddress) {
+        this.imageAddress = imageAddress == null ? null : imageAddress.trim();
     }
 
     public String getGoodsLink() {

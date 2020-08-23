@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        文章添加
+    </title>
+    <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../css/x-admin.css" media="all">
+
+</head>
+<body>
+<div class="x-nav">
+            <span class="layui-breadcrumb">
+              <a><cite>首页</cite></a>
+              <a><cite>订单管理</cite></a>
+              <a><cite>订单列表</cite></a>
+            </span>
+</div>
+<div class="x-body">
+    <form class="layui-form " lay-filter="example">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">订单信息</li>
+                <li>商品信息</li>
+                <li>其他信息</li>
+            </ul>
+
+            <div class="layui-tab-content" >
+                <div class="layui-tab-item layui-show">
+                    <!--<form class="layui-form layui-form-pane" action="" id="add">-->
+                    <input type="hidden" name="id" value="{$art.id}">
+                    
+                    
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            订单编号
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="orderCode" name="orderCode" required   autocomplete="off"  class="layui-input" lay-verify="orderCode">
+                    </div>
+                </div>
+                    
+					<div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            币种
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="currency" name="currency" required   autocomplete="off"  class="layui-input" lay-verify="currency">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            订单来源
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="orderSource" name="orderSource" required   autocomplete="off"  class="layui-input" lay-verify="orderSource">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            系统订单状态
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="systemOrderStatus" name="systemOrderStatus" required   autocomplete="off"  class="layui-input" lay-verify="systemOrderStatus">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            财务状态
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="financialStatus" name="financialStatus" required   autocomplete="off"  class="layui-input" lay-verify="financialStatus">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            库存状态
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="stockStatus" name="stockStatus" required   autocomplete="off"  class="layui-input" lay-verify="stockStatus">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            所属国家
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="country" name="country" required   autocomplete="off"  class="layui-input" lay-verify="country">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            来源订单编号
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="sourceOrderCode" name="sourceOrderCode" required   autocomplete="off"  class="layui-input" lay-verify="sourceOrderCode">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            订单商品备注
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="orderGoodsRemarks" name="orderGoodsRemarks" required   autocomplete="off"  class="layui-input" lay-verify="orderGoodsRemarks">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                           订单快递备注
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="orderExpressRemarks" name="orderExpressRemarks" required   autocomplete="off"  class="layui-input" lay-verify="orderExpressRemarks">
+                    </div>
+                </div>
+                </div>
+                
+                
+                
+                <!-- 商品信息 -->
+                <div class="layui-tab-item">
+                    <!--  <form class="layui-form layui-form-pane" action="" id="add">-->
+                
+                <div class="layui-form-item">
+    				<label class="layui-form-label" style="left:20px">商品</label>
+				    <div class="layui-input-block" style="width:500px;left:20px" >
+				      <select name="goodsName" id = "goodsName" lay-filter="goodsName" lay-verify="" >
+				        <option value="">请选择商品</option>
+				        
+				      </select>
+				    </div>
+			  	</div>
+                
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            商品金额(韩元)
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="goodsAmount" name="goodsAmount" required   autocomplete="off"  class="layui-input" lay-verify="goodsAmount">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            来源商品编号
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="sourceGoodsCode" name="sourceGoodsCode" required   autocomplete="off"  class="layui-input" lay-verify="sourceGoodsCode">
+                    </div>
+                </div>
+                
+               <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            购买数量
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="purchaseCount" name="purchaseCount" required   autocomplete="off"  class="layui-input" lay-verify="purchaseCount">
+                    </div>
+                </div>
+                
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                           已发货数
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="shippedCount" name="shippedCount" required   autocomplete="off"  class="layui-input" lay-verify="shippedCount">
+                    </div>
+                </div>
+				
+				
+				
+				<div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            固定电话
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="fixedPhone" name="fixedPhone" required   autocomplete="off"  class="layui-input" lay-verify="fixedPhone">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            地址
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="buyerAddress" name="buyerAddress" required   autocomplete="off"  class="layui-input" lay-verify="buyerAddress">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            剩余库存
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="surplusStock" name="surplusStock" required   autocomplete="off"  class="layui-input" lay-verify="surplusStock">
+                    </div>
+                </div>
+                
+                
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            国内物流单号
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="domesticLogisticsNumber" name="domesticLogisticsNumber" required   autocomplete="off"  class="layui-input" lay-verify="domesticLogisticsNumber">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            国际物流单号
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="internatinnalLogisticsNumber" name="internatinnalLogisticsNumber" required   autocomplete="off"  class="layui-input" lay-verify="internatinnalLogisticsNumber">
+                    </div>
+                </div>
+                
+
+                    
+                    <!--</form>-->
+                </div>
+                <!-- 其他信息 -->
+               <div class="layui-tab-item">
+               
+               <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            买家名称
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="buyerName" name="buyerName" required   autocomplete="off"  class="layui-input" lay-verify="buyerName">
+                    </div>
+                </div>
+                
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            买家手机号码
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="buyerPhone" name="buyerPhone" required   autocomplete="off"  class="layui-input" lay-verify="buyerPhone">
+                    </div>
+                </div>
+                
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            买家通关代码
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="buyerClearanceCode" name="buyerClearanceCode" required   autocomplete="off"  class="layui-input" lay-verify="buyerClearanceCode">
+                    </div>
+                </div>
+               
+               
+               <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                           供货商名称
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="supplierName" name="supplierName" required   autocomplete="off"  class="layui-input" lay-verify="supplierName">
+                    </div>
+                </div>
+                
+               <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            收货人姓名
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="consigneeName" name="consigneeName" required   autocomplete="off"  class="layui-input" lay-verify="consigneeName">
+                    </div>
+                </div>
+               
+               
+               <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            所属销售
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="belongSale" name="belongSale" required   autocomplete="off"  class="layui-input" lay-verify="belongSale">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">
+                            标签
+                        </label>
+                      <div class="layui-input-inline">
+                        <input style="width:500px" type="text" id="labers" name="labers" required   autocomplete="off"  class="layui-input" lay-verify="labers">
+                    </div>
+                </div>
+               
+               <div class="layui-form-item">
+                        <button class="layui-btn"  type="button" lay-filter="add" lay-submit="">
+                            保存
+                        </button>
+                    </div>
+               </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+ <script src="../layui/layui.js" charset="utf-8">
+        </script>
+        <script src="../js/x-layui.js" charset="utf-8">
+        </script>
+       <script src="../js/jquery.min.js"></script>
+<script>
+
+	function getData(){
+		var url = window.location.search;
+		id = url.split('=')[1];
+		var s = {};
+		s.id = id;
+		var data;
+		$.ajax({
+			    //请求方式
+			    type : "POST",
+			    //请求的媒体类型
+			    contentType: "application/json;charset=UTF-8",
+			    //请求地址
+			    url : "/Shopping/getOrderMessage",
+			    //数据，json字符串
+			    data : JSON.stringify(s),
+			    async : false,
+			    //请求成功
+			    success : function(result) {
+			        if(result.code == 1){
+			        	console.log('系统错误，请联系管理员!!!'); 
+			        }else if(result.code == 0){
+			        	data = result.data;
+			        }else{
+			        	console.log('系统错误，请联系管理员!!!');
+			        }
+			    },
+			    //请求失败，包含具体的错误信息
+			    error : function(e){
+			        console.log(e.status);
+			        console.log(e.responseText);
+			    }
+			});
+		return data;
+	}
+	
+	
+	function getGoods(){
+		$.ajax({
+		    //请求方式
+		    type : "POST",
+		    //请求的媒体类型
+		    contentType: "application/json;charset=UTF-8",
+		    //请求地址
+		    url : "/Shopping/getGood",
+		    //数据，json字符串
+		    async : false,
+		    //请求成功
+		    success : function(result) {
+		       $.each(result.data, function (index, item) {
+		    	   $('#goodsName').append(new Option(item.goodsNameChinese, item.id));// 下拉菜单里添加元素
+		    	   });
+		    layui.form.render("select");
+		    },
+		    //请求失败，包含具体的错误信息
+		    error : function(e){
+		        console.log(e.status);
+		        console.log(e.responseText);
+		    }
+		});
+	}
+
+	var goodsName = "";
+    layui.use(['element','layer','form'], function(){
+    	getGoods();
+    	var data = getData();
+        $ = layui.jquery;//jquery
+        lement = layui.element;//面包导航
+        layer = layui.layer;//弹出层
+        form = layui.form;
+        console.log(data.goodsId)
+        form.val('example', {
+            "orderCode": data.orderCode // "name": "value"
+            ,"currency": data.currency
+            ,"orderSource":data.orderSource
+            ,"systemOrderStatus": data.systemOrderStatus
+            ,"financialStatus": data.financialStatus 
+            ,"stockStatus": data.stockStatus
+            ,"goodsAmount": data.goodsAmount
+            ,"country": data.country
+            ,"sourceOrderCode": data.sourceOrderCode
+            ,"sourceGoodsCode": data.sourceGoodsCode
+            ,"orderGoodsRemarks": data.orderGoodsRemarks
+            ,"orderExpressRemarks": data.orderExpressRemarks
+            ,"purchaseCount": data.purchaseCount
+            ,"buyerName": data.buyerName
+			,"buyerPhone": data.buyerPhone
+			,"buyerClearanceCode": data.buyerClearanceCode
+			,"labers": data.labers
+			,"shippedCount": data.shippedCount
+			,"consigneeName": data.consigneeName
+			,"fixedPhone": data.fixedPhone
+			,"buyerAddress": data.buyerAddress
+			,"surplusStock": data.surplusStock
+			,"belongSale": data.belongSale
+			,"domesticLogisticsNumber": data.domesticLogisticsNumber
+			,"internatinnalLogisticsNumber": data.internatinnalLogisticsNumber
+			,"supplierName":data.supplierName
+			,"goodsName":data.goodsId
+          });
+        
+
+        form.on('select(goodsName)', function (data) {        //对应lay-filter
+        	goodsName= data.elem[data.elem.selectedIndex].value;    //获取显示的值
+        });
+        
+        form.verify({
+        	currency: function(value){
+                if(value.length >20){
+                  return '币种不可超过20个字符';
+                }
+            },
+            orderSource: function(value){
+                if(value.length >50){
+                  return '订单来源不可超过50个字符';
+                }
+            },
+            systemOrderStatus: function(value){
+                if(value.length >20){
+                  return '系统订单状态不可超过20个字符';
+                }
+            },
+            financialStatus: function(value){
+                if(value.length >10){
+                  return '财务状态不可超过10个字符';
+                }
+            },
+            stockStatus: function(value){
+                if(value.length >10){
+                  return '库存状态不可超过10个字符';
+                }
+            },
+            goodsAmount: function(value){
+                if(value.length >300){
+                  return '商品金额(韩元)不可超过300个字符';
+                }
+            },
+            country: function(value){
+                if(value.length >20){
+                  return '所属国家不可超过20个字符';
+                }
+            },
+            sourceOrderCode: function(value){
+                if(value.length >50){
+                  return '来源订单编号不可超过50个字符';
+                }
+            },
+            sourceGoodsCode: function(value){
+                if(value.length >50){
+                  return '来源商品编号不可超过50个字符';
+                }
+            },
+            orderGoodsRemarks: function(value){
+                if(value.length >200){
+                  return '订单商品备注不可超过200个字符';
+                }
+            },
+            orderExpressRemarks: function(value){
+                if(value.length >200){
+                  return '订单快递备注不可超过200个字符';
+                }
+            },
+            purchaseCount: function(value){
+                if(value.length >18){
+                  return '购买数量不可超过18个字符';
+                }
+            },
+            buyerName: function(value){
+                if(value.length >30){
+                  return '买家名称不可超过30个字符';
+                }
+            },
+            buyerPhone: function(value){
+                if(value.length >20){
+                  return '买家手机号码不可超过20个字符';
+                }
+            },
+            buyerClearanceCode: function(value){
+                if(value.length >50){
+                  return '买家通关代码不可超过50个字符';
+                }
+            },
+            labers: function(value){
+                if(value.length >500){
+                  return '标签不可超过500个字符';
+                }
+            },
+            shippedCount: function(value){
+                if(value.length >300){
+                  return '已发货数不可超过300个字符';
+                }
+            },
+            consigneeName: function(value){
+                if(value.length >20){
+                  return '收货人姓名不可超过20个字符';
+                }
+            },
+            fixedPhone: function(value){
+                if(value.length >20){
+                  return '固定电话不可超过20个字符';
+                }
+            },
+            buyerAddress: function(value){
+                if(value.length >100){
+                  return '地址不可超过100个字符';
+                }
+            },
+            surplusStock: function(value){
+                if(value.length >10){
+                  return '剩余库存不可超过10个字符';
+                }
+            },
+            belongSale: function(value){
+                if(value.length >10){
+                  return '所属销售不可超过10个字符';
+                }
+            },
+            domesticLogisticsNumber: function(value){
+                if(value.length >50){
+                  return '国内物流单号不可超过50个字符';
+                }
+            },
+            internatinnalLogisticsNumber: function(value){
+                if(value.length >50){
+                  return '国际物流单号不可超过50个字符';
+                }
+            },
+            supplierName: function(value){
+                if(value.length >20){
+                  return '供货商名称不可超过20个字符';
+                }
+            }
+        	
+          });
+
+
+
+        //监听提交
+        form.on('submit(add)', function(data){
+        	var s = {};
+        	s.id = id
+			s.orderCode = $("#orderCode").val();
+			s.currency = $("#currency").val();
+			s.orderSource = $("#orderSource").val();
+			s.systemOrderStatus = $("#systemOrderStatus").val();
+			s.financialStatus = $("#financialStatus").val();
+			s.stockStatus = $('#stockStatus').val();
+			s.goodsAmount = $('#goodsAmount').val();
+			s.country = $('#country').val();
+			s.sourceOrderCode = $('#sourceOrderCode').val();
+			s.sourceGoodsCode = $('#sourceGoodsCode').val();
+			s.orderGoodsRemarks = $('#orderGoodsRemarks').val();
+			s.orderExpressRemarks = $('#orderExpressRemarks').val();
+			s.purchaseCount = $('#purchaseCount').val();
+			s.buyerName = $('#buyerName').val();
+			s.buyerPhone = $('#buyerPhone').val();
+			s.buyerClearanceCode = $('#buyerClearanceCode').val();
+			s.labers = $('#labers').val();
+			s.shippedCount = $('#shippedCount').val();
+			s.consigneeName = $('#consigneeName').val();
+			s.fixedPhone = $('#fixedPhone').val();
+			s.buyerAddress = $('#buyerAddress').val();
+			s.surplusStock = $('#surplusStock').val();
+			s.belongSale = $('#belongSale').val();
+			s.domesticLogisticsNumber = $('#domesticLogisticsNumber').val();
+			s.internatinnalLogisticsNumber = $('#internatinnalLogisticsNumber').val();
+			s.goodsId = goodsName;
+			$.ajax({
+       		    //请求方式
+       		    type : "POST",
+       		    //请求的媒体类型
+       		    contentType: "application/json;charset=UTF-8",
+       		    //请求地址
+       		    url : "/Shopping/updateOrders",
+       		    //数据，json字符串
+       		    data : JSON.stringify(s),
+       		    //请求成功
+       		    success : function(result) {
+       		        if(result.code == 0){
+       		        	layer.alert("修改成功", {icon: 6,closeBtn: 0},function () {
+       	                    // 获得frame索引
+       	                    var index = parent.layer.getFrameIndex(window.name);
+       	                    //关闭当前frame
+       	                    parent.layer.close(index);
+       	                });
+       		        }else{
+       		        	console.log('系统错误，请联系管理员!!!');
+       		        }
+       		    },
+       		    //请求失败，包含具体的错误信息
+       		    error : function(e){
+       		        console.log(e.status);
+       		        console.log(e.responseText);
+       		    }
+       		}); 
+                
+            
+            return false;
+
+        });
+
+    })
+</script>
+
+</body>
+</html>

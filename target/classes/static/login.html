@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>系统登录</title>
+  <title>骏懿宸跨境电商后台管理系统</title>
   <link rel="stylesheet" href="css/login.css">
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script src="layer/layer.js"></script>
@@ -13,7 +13,7 @@
 </head>
 <body class="login-bg">
     <div class="login">
-        <div class="message">系统登录</div>
+        <div class="message">骏懿宸跨境电商后台管理系统</div>
         <div id="darkbannerwrap"></div>   
         <form  class="layui-form" >
             <input id="userCode" name="userCode" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
@@ -25,6 +25,16 @@
         </form>
     </div>
     <script>
+    
+    	$(function () {
+        //回车登录
+        	$("body").keyup(function(event){
+           	if(event.keyCode==13) {//keyCode=13是回车键
+        	   	login();
+           		}
+        	});
+		});
+    
     	function login(){
  	    	var list = null;
 			var s = {};

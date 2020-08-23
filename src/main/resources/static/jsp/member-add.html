@@ -110,6 +110,7 @@
         <script src="../js/x-layui.js" charset="utf-8">
         </script>
        <script src="../js/jquery.min.js"></script>
+       <script type="text/javascript" src="../js/md5.js"></script>
         
         <script>
         
@@ -127,6 +128,9 @@
                        return '用户名不得为空且不得超过17个字符';
                      }
                  },
+                 userCode: [
+                	 /^[a-zA-Z0-9_-]{4,16}$/,'用户名4到17位（字母，数字，下划线，减号）'
+                 ],
                  userPassword: function(value){
                      if(value.length < 6 || value.length >16){
                        return '密码为6到16个字符';

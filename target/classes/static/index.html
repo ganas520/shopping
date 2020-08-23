@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
-  <title>后台管理系统</title>
+  <title>骏懿宸跨境电商后台管理系统</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,7 +24,7 @@
   <div class="layui-header header header-demo">
     <div class="layui-main">
       <div class="admin-logo-box">
-        <a class="logo" href="" title="logo">后台管理系统</a>
+        <a class="logo" href="" title="logo">骏懿宸跨境电商</a>
         <div class="larry-side-menu">
           <i class=" layui-icon iconfont" aria-hidden="true">&#xe83c;</i>
         </div>
@@ -40,7 +40,7 @@
         <li class="layui-nav-item"> <a href="javascript:;" id = "userCode"></a>
           <dl class="layui-nav-child">
             <!-- 二级菜单 -->
-            <dd><a href="javascript:;" onclick="member_show('张三','./jsp/member-show.html','10001','360','400')">个人信息</a></dd>
+            <!-- <dd><a href="javascript:;" onclick="member_show('张三','./jsp/member-show.html','10001','360','400')">个人信息</a></dd>-->
             <!--  <dd><a href="">切换帐号</a></dd>-->
             <dd><a href="javascript:;" onclick="logout()">退出</a></dd>
           </dl>
@@ -64,12 +64,12 @@
           <dl class="layui-nav-child">
             <dd class="">
             <dd class=""> <a href="javascript:;" _href="./jsp/order-all.html"> <cite>所有订单</cite> </a> </dd>
-			<dd class=""> <a href="javascript:;" _href="./jsp/order-normal.html"> <cite>正常订单</cite> </a> </dd>
-			<dd class=""> <a href="javascript:;" _href="./jsp/order-cancel.html"> <cite>取消订单</cite> </a> </dd>
-			<dd class=""> <a href="javascript:;" _href="./jsp/order-replenishment.html"> <cite>补货订单</cite> </a> </dd>
-			<dd class=""> <a href="javascript:;" _href="./jsp/order-exchange.html"> <cite>换货订单</cite> </a> </dd>
-			<dd class=""> <a href="javascript:;" _href="./jsp/order-return.html"> <cite>退货订单</cite> </a> </dd>
-			<dd class=""> <a href="javascript:;" _href="./jsp/order-compensate.html"> <cite>补偿订单</cite> </a> </dd>
+			<dd class=""> <a href="javascript:;" _href="./jsp/order-normal.html"> <cite>付款阶段</cite> </a> </dd>
+			<dd class=""> <a href="javascript:;" _href="./jsp/order-cancel.html"> <cite>产品准备</cite> </a> </dd>
+			<dd class=""> <a href="javascript:;" _href="./jsp/order-replenishment.html"> <cite>交付订单</cite> </a> </dd>
+			<dd class=""> <a href="javascript:;" _href="./jsp/order-exchange.html"> <cite>运输订单</cite> </a> </dd>
+			<dd class=""> <a href="javascript:;" _href="./jsp/order-return.html"> <cite>交货完成</cite> </a> </dd>
+			<dd class=""> <a href="javascript:;" _href="./jsp/order-compensate.html"> <cite>直接交付</cite> </a> </dd>
           </dl>
         </li>
         <li class="layui-nav-item"> <a class="javascript:;" href="javascript:;"> <i class="layui-icon iconfont" style="top: 3px;">&#xe661;</i><cite>商品管理</cite> </a>
@@ -129,7 +129,9 @@
 <script>
     $(".daohang").click(function(){
         var table = $(this).attr("ids");
+        console.log("table:"+table);
         var ids = $(".show_list").attr("id");
+        console.log("ids:"+ids);
         $("#"+ids+"").addClass("hide_lits");
         $("#"+ids+"").removeClass("show_list");
         $(""+table+"").removeClass("hide_lits");

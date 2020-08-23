@@ -1,5 +1,7 @@
 package com.flight.china.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,8 @@ public class UserAction {
 	@Autowired
 	public TbUserService tbUserService;
 	
+	private String getDate = "";
+	
 	@RequestMapping(value = "/login",method= RequestMethod.POST)
 	public int login(@RequestBody(required=false) TbUser tbUser,HttpServletRequest req){
 		if(tbUser == null){
@@ -32,7 +36,18 @@ public class UserAction {
 		if(tbUsers.size() != 0) {
 			req.getSession().setAttribute(ConstantUtils.USER_SESSION_KEY, tbUsers.get(0));
 		}
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		getDate = simpleDateFormat.format(new Date());
 		return tbUsers.size();
+	}
+	
+	@RequestMapping(value="/getDate",method=RequestMethod.POST)
+	public Map<String,Object> getDate(HttpServletRequest req) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("message", "请求成功");
+		map.put("code", 0);
+		map.put("data",getDate );
+		return map;
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.POST)

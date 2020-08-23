@@ -114,12 +114,17 @@
  		set user_password = #{userPassword,jdbcType=VARCHAR}
  		where id = #{id,jdbcType=INTEGER}
  	</update>
+ 	
+ 	
  	<select id="getUserLike" parameterType="com.flight.china.bean.TbUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tb_user
     where user_code like  CONCAT(CONCAT('%', #{userCode}), '%')
      order by create_time DESC
+    <if test="startWith != null and rows != null">
+       <include refid="Common.pagingEnd"/>  
+    </if>
  	</select>
  	
 </mapper>
